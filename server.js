@@ -12,6 +12,13 @@ app.use(bodyParser.json())
 
 app.get('/health', api.getHealth)
 
+// Refer https://expressjs.com/en/guide/routing.html for regex routing
+
+app.route('/:studentId/*')
+  .get(api.getStudentProperty)
+  .put(api.setStudentProperty)
+  .delete(api.deleteStudentProperty)
+
 app.use(middleware.handleError)
 app.use(middleware.notFound)
 
