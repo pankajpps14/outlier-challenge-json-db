@@ -10,8 +10,8 @@ const server = require('./server')
 const endpoint = `http://localhost:${port}`
 const studentId = 'test-student-id'
 const testStudentData = {
-  firstName: 'firstName',
-  lastName: 'lastName',
+  firstName: 'foo',
+  lastName: 'bar',
   school: {
     name: 'St. Stephens'
   },
@@ -41,7 +41,7 @@ tape('PUT /:student-id/:propertyName creates a studentId.json file with studentI
   jsonist.put(url, testData, (err, body, res) => {
     if (err) t.error(err)
     t.equal(res.statusCode, 204, 'response code should be 204')
-    t.ok(testFIleExists(), 'student file should be created')
+    t.ok(testFileExists(), 'student file should be created')
     t.end()
     deleteTestFile()
   })
@@ -205,7 +205,7 @@ function createTestFile () {
   fs.writeFileSync(testFilePath, JSON.stringify(testStudentData))
 }
 
-function testFIleExists () {
+function testFileExists () {
   console.log(testFilePath)
   console.log(fs.existsSync(testFilePath))
   return fs.existsSync(testFilePath)
